@@ -11,12 +11,39 @@
 	width: 100%;
 	position: relative;
 }
-.banner1 img{
+.imgbox{
+	height: 540px;
+    width: 100%;
+    position: relative;
+}
+.imgbox li{
 	height: 540px;
     width: 100%;
     position: absolute; 
     top: 0;
-    left: 0; 
+    left: 0;
+}
+.imgbox .active{
+	z-index: 9;
+}
+.banner1 img{
+	height: 540px;
+    width: 100%;
+}
+.lunbo{
+	width: 21px;
+	height: 130px;
+	/* background: red; */
+	position: absolute;
+	left: 100px;
+	bottom: 50px;
+	text-align: center;
+	line-height: 26px;
+	/* color: #fff; */
+	z-index: 999;
+}
+.lunbo .active{
+	color: #467D96;
 }
 .pro{
 	width: 1200px;

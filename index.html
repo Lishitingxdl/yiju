@@ -43,9 +43,21 @@
 
 	<!-- banner开始 -->
 	<div class="banner1">
-		<img src="img/banner1.png" alt="">
-		<div class="lunbo">
-		</div>
+		<ul class="imgbox">
+			<li class="active"><img src="img/banner1.png" alt=""></li>
+			<li><img src="img/banner2.jpg" alt=""></li>
+			<li><img src="img/banner3.jpg" alt=""></li>
+			<li><img src="img/banner4.jpg" alt=""></li>
+			<li><img src="img/banner5.jpg" alt=""></li>
+		</ul>
+		
+		<ul class="lunbo">
+			<li class="active">1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
 	</div>
 	<!-- banner结束 -->
 	<!-- 产品中心 -->
@@ -352,5 +364,95 @@
 		</div>
 	</div>
 	<!-- 底部结束 -->
+<script src="jquery-3.3.1.min.js"></script>
+<script>
+	{
+	let imgs=document.querySelectorAll(".imgbox li");
+	let pagers=document.querySelectorAll(".lunbo li");
+	let banner=document.querySelector(".banner1");
+	// console.dir(img[0])
+	pagers.forEach(function (ele,index) {
+		ele.onclick=function () {
+			for(let i=0;i<imgs.length;i++){
+				imgs[i].classList.remove("active");
+				pagers[i].classList.remove("active");
+			}
+			this.classList.add("active");
+			imgs[index].classList.add("active");
+			n=index;
+		}
+	})
+	let n=0;
+	let t=setInterval(move,3000);
+
+	// setInterval(function(){    //开启播放、清除播放功能
+	function move(){
+		n++;
+		// n=n%5;
+		if(n===imgs.length){       //判断边界
+			n=0;
+		}
+		if(n<0){                  //判断n<0
+			n=imgs.length-1;
+		}
+		for(let i=0;i<imgs.length;i++){
+				imgs[i].classList.remove("active");
+				pagers[i].classList.remove("active");
+			}
+		imgs[n].classList.add("active");
+		pagers[n].classList.add("active");
+		}
+	banner.onmouseenter=function(){           //鼠标进入暂停
+		clearInterval(t);                     //清除自动
+	}
+	banner.onmouseleave=function(){			  //鼠标进入开始
+		t=setInterval(move,3000);
+	}
+	let flag=true;
+	pagers.onclick=function(){
+		if(flag) {
+			flag=false;
+			move();
+		}
+	};
+	pagers.onclick=function(){
+		n-=2;
+		if(flag) {
+			flag=false;
+			move();
+		}
+	};
+	imgs.forEach(function(ele,index){
+		ele.addEventListener("transitionend", function(){
+			flag=true;
+		})
+	})
+	}
+	// $(".lunbo").mouseenter(function () {
+ //            let index=$(this).index(".lunbo");
+ //            $(".imgbox li").removeClass("active").eq(index).addClass("active");
+ //            $(".lunbo").removeClass("active").eq(index).addClass("active");
+ //            // $(".left1").removeClass("active").eq(index).addClass("active");
+ //            // $(".right1").removeClass("active").eq(index).addClass("active");
+ //            n=index;
+ //        });
+ //        let n=0;
+ //        function move() {
+ //            n++;
+ //            if(n===$(".imgbox li").length){
+ //                n=0;
+ //            }
+ //            if(n<0){
+ //                n=$(".imgbox li").length-1;
+ //            }
+ //            $(".imgbox li").removeClass("active").eq(n).addClass("active");
+ //            $(".page").removeClass("active").eq(n).addClass("active");
+ //            // $(".left1").removeClass("active").eq(n).addClass("active");
+ //            // $(".right1").removeClass("active").eq(n).addClass("active");
+ //        }
+ //        move();
+ //        setInterval(move,3000);
+
+</script>
 </body>
 </html>
